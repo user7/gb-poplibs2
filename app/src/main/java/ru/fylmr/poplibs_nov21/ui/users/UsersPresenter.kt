@@ -1,12 +1,14 @@
 package ru.fylmr.poplibs_nov21.ui.users
 
+import com.github.terrakok.cicerone.Router
 import moxy.MvpPresenter
 import ru.fylmr.poplibs_nov21.domain.GithubUsersRepository
 import ru.fylmr.poplibs_nov21.model.GithubUserModel
 import ru.fylmr.poplibs_nov21.ui.base.IListPresenter
 
 class UsersPresenter(
-    private val usersRepository: GithubUsersRepository
+    private val router: Router,
+    private val usersRepository: GithubUsersRepository,
 ) : MvpPresenter<UsersView>() {
 
     val usersListPresenter = UsersListPresenter()
@@ -26,11 +28,16 @@ class UsersPresenter(
         viewState.updateList()
     }
 
+    fun backPressed(): Boolean {
+        router.exit()
+        return true
+    }
+
     class UsersListPresenter : IListPresenter<UserItemView> {
 
         val users = mutableListOf<GithubUserModel>()
 
-        override var itemClickListener: () -> Unit = {}
+        override var itemClickListener = { }
 
         override fun getCount() = users.size
 
