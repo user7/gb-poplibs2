@@ -1,10 +1,10 @@
 package ru.fylmr.poplibs_nov21
 
 import android.app.Application
-import android.util.Log
 import com.github.terrakok.cicerone.Cicerone
 import com.github.terrakok.cicerone.Router
 import ru.fylmr.poplibs_nov21.network.NetworkStatus
+import ru.fylmr.poplibs_nov21.rxjava.subscribeToMultiThreadingSingle
 
 class App : Application() {
 
@@ -22,9 +22,7 @@ class App : Application() {
         super.onCreate()
         _instance = this
 
-        networkStatus.networkStatusSubject.subscribe {
-            Log.d("NetworkStatus", "Доступна ли сеть: $it")
-        }
+        subscribeToMultiThreadingSingle()
     }
 
     companion object {
