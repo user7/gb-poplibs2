@@ -4,7 +4,8 @@ import android.app.Application
 import com.github.terrakok.cicerone.Cicerone
 import com.github.terrakok.cicerone.Router
 import ru.fylmr.poplibs_nov21.network.NetworkStatus
-import ru.fylmr.poplibs_nov21.rxjava.onErrorRetryExample
+import ru.fylmr.poplibs_nov21.rxjava.BackPressure
+import ru.fylmr.poplibs_nov21.rxjava.NoBackPressure
 
 class App : Application() {
 
@@ -22,7 +23,7 @@ class App : Application() {
         super.onCreate()
         _instance = this
 
-        onErrorRetryExample()
+        BackPressure().exec()
     }
 
     companion object {
