@@ -10,6 +10,7 @@ import moxy.ktx.moxyPresenter
 import ru.fylmr.poplibs_nov21.App
 import ru.fylmr.poplibs_nov21.databinding.FragmentUsersBinding
 import ru.fylmr.poplibs_nov21.domain.GithubUsersRepository
+import ru.fylmr.poplibs_nov21.model.GithubUserModel
 import ru.fylmr.poplibs_nov21.ui.base.BackButtonListener
 import ru.fylmr.poplibs_nov21.ui.users.adapter.UsersAdapter
 
@@ -22,7 +23,7 @@ class UsersFragment : MvpAppCompatFragment(), UsersView, BackButtonListener {
         get() = _binding!!
 
     private val adapter by lazy {
-        UsersAdapter(presenter.usersListPresenter)
+        UsersAdapter { presenter.onUserClicked() }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -37,8 +38,8 @@ class UsersFragment : MvpAppCompatFragment(), UsersView, BackButtonListener {
         binding.usersRecycler.adapter = adapter
     }
 
-    override fun updateList() {
-        adapter.notifyDataSetChanged()
+    override fun updateList(users: List<GithubUserModel>) {
+        adapter.submitList(users)
     }
 
     override fun backPressed(): Boolean {
