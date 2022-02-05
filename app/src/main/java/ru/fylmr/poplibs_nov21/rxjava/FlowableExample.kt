@@ -27,7 +27,7 @@ class BackPressure {
 
     private fun producer() = Flowable.range(0, 100_000_000)
         .subscribeOn(Schedulers.io())
-        .onBackpressureLatest()
+        .onBackpressureBuffer()
 
     fun exec() {
         producer()
