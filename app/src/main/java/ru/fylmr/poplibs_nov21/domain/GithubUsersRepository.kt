@@ -1,19 +1,12 @@
 package ru.fylmr.poplibs_nov21.domain
 
+import io.reactivex.rxjava3.core.Single
 import ru.fylmr.poplibs_nov21.model.GithubUserModel
+import ru.fylmr.poplibs_nov21.network.GithubApiService
 
-class GithubUsersRepository {
+class GithubUsersRepository(private val githubApiService: GithubApiService) : IGithubUsersRepository {
 
-    private val users = listOf(
-        GithubUserModel("user1"),
-        GithubUserModel("user2"),
-        GithubUserModel("user3"),
-        GithubUserModel("user4"),
-        GithubUserModel("user5"),
-        GithubUserModel("user6"),
-    )
-
-    fun getUsers(): List<GithubUserModel> {
-        return users
+    override fun getUsers(): Single<List<GithubUserModel>> {
+        return githubApiService.getUsers()
     }
 }
