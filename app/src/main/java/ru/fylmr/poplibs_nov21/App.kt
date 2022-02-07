@@ -3,9 +3,6 @@ package ru.fylmr.poplibs_nov21
 import android.app.Application
 import com.github.terrakok.cicerone.Cicerone
 import com.github.terrakok.cicerone.Router
-import ru.fylmr.poplibs_nov21.network.NetworkStatus
-import ru.fylmr.poplibs_nov21.rxjava.BackPressure
-import ru.fylmr.poplibs_nov21.rxjava.NoBackPressure
 
 class App : Application() {
 
@@ -17,13 +14,9 @@ class App : Application() {
     val router
         get() = cicerone.router
 
-    private val networkStatus by lazy { NetworkStatus(this) }
-
     override fun onCreate() {
         super.onCreate()
         _instance = this
-
-        BackPressure().exec()
     }
 
     companion object {
