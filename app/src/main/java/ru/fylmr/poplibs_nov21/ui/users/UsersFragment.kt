@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.LinearLayoutManager
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
@@ -13,15 +14,18 @@ import ru.fylmr.poplibs_nov21.databinding.FragmentUsersBinding
 import ru.fylmr.poplibs_nov21.domain.GithubUsersRepository
 import ru.fylmr.poplibs_nov21.model.GithubUserModel
 import ru.fylmr.poplibs_nov21.network.ApiHolder
+import ru.fylmr.poplibs_nov21.screens.UsersScreenInitParams
 import ru.fylmr.poplibs_nov21.ui.base.BackButtonListener
+import ru.fylmr.poplibs_nov21.ui.base.GlideImageLoader
 import ru.fylmr.poplibs_nov21.ui.users.adapter.UsersAdapter
 
-class UsersFragment : MvpAppCompatFragment(), UsersView, BackButtonListener {
+class UsersFragment() : MvpAppCompatFragment(), UsersView, BackButtonListener {
 
     private val presenter by moxyPresenter {
         UsersPresenter(
             App.instance.router,
-            GithubUsersRepository(ApiHolder.githubApiService)
+            GithubUsersRepository(ApiHolder.githubApiService),
+            initModel
         )
     }
 
@@ -30,7 +34,11 @@ class UsersFragment : MvpAppCompatFragment(), UsersView, BackButtonListener {
         get() = _binding!!
 
     private val adapter by lazy {
-        UsersAdapter { presenter.onUserClicked() }
+        UsersAdapter(GlideImageLoader()) { presenter.onUserClicked() }
+    }
+
+    private val initModel by lazy {
+        requireArguments().getSerializable(KEY_INIT_PARAMS) as UsersScreenInitParams
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -57,5 +65,16 @@ class UsersFragment : MvpAppCompatFragment(), UsersView, BackButtonListener {
     override fun showError(message: String?) {
         Toast.makeText(requireContext(), message.orEmpty(), Toast.LENGTH_SHORT)
             .show()
+    }
+
+    companion object {
+
+        private const val KEY_INIT_PARAMS = "KEY_INIT_PARAMS"
+
+        fun newInstance(initModel: UsersScreenInitParams): UsersFragment {
+            return UsersFragment().apply {
+                arguments = bundleOf(KEY_INIT_PARAMS to initModel)
+            }
+        }
     }
 }
