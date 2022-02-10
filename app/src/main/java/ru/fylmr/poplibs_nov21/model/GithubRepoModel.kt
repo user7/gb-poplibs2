@@ -11,4 +11,10 @@ data class GithubRepoModel(
 
     @Expose
     val name: String? = null,
+
+    @Expose
+    val watchers: Int = 0,
+
+    @Expose
+    val forks: Int = 0,
 )

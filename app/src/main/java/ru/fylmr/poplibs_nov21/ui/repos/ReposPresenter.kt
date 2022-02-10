@@ -7,6 +7,7 @@ import moxy.MvpPresenter
 import ru.fylmr.poplibs_nov21.domain.IGithubReposRepository
 import ru.fylmr.poplibs_nov21.model.GithubRepoModel
 import ru.fylmr.poplibs_nov21.screens.AppScreens
+import ru.fylmr.poplibs_nov21.screens.RepoScreenInitParams
 import ru.fylmr.poplibs_nov21.screens.ReposScreenInitParams
 import ru.fylmr.poplibs_nov21.screens.UsersScreenInitParams
 
@@ -40,7 +41,18 @@ class ReposPresenter(
         return true
     }
 
-    fun onRepoClicked(repoModel: GithubRepoModel) {
-        TODO("Not yet implemented")
+    fun onRepoClicked(repo: GithubRepoModel) {
+        if (repo.name != null) {
+            router.navigateTo(
+                AppScreens.repoScreen(
+                    RepoScreenInitParams(
+                        repo.name,
+                        repo.forks,
+                        repo.watchers,
+                        repo.url ?: ""
+                    )
+                )
+            )
+        }
     }
 }
