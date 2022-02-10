@@ -2,16 +2,13 @@ package ru.fylmr.poplibs_nov21.model
 
 import com.google.gson.annotations.Expose
 
-data class GithubUserModel(
+data class GithubRepoModel(
     @Expose
     val id: Long,
 
     @Expose
-    val login: String,
+    val url: String? = null,
 
     @Expose
-    val avatarUrl: String? = null,
-
-    @Expose
-    val reposUrl: String? = null,
+    val name: String? = null,
 )
