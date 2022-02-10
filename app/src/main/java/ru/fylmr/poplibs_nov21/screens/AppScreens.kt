@@ -11,6 +11,4 @@ object AppScreens {
     }
 }
 
-data class UsersScreenInitParams(
-    val exampleField: String = ""
-) : Serializable
+class UsersScreenInitParams : Serializable
