@@ -67,8 +67,6 @@ class UsersFragment() : MvpAppCompatFragment(), UsersView, BackButtonListener {
 
     companion object {
 
-        private const val KEY_INIT_PARAMS = "KEY_INIT_PARAMS"
-
         fun newInstance(): UsersFragment {
             return UsersFragment()
         }

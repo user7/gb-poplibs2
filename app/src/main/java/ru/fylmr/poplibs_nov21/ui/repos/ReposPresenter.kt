@@ -33,7 +33,7 @@ class ReposPresenter(
     }
 
     fun onItemClicked(repo: GithubRepoModel) {
-
+        // todo
     }
 
     fun backPressed(): Boolean {
