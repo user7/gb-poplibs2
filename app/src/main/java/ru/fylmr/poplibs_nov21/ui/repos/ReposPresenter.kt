@@ -5,9 +5,9 @@ import com.github.terrakok.cicerone.Router
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 import moxy.MvpPresenter
-import ru.fylmr.poplibs_nov21.domain.repos.IGithubReposRepository
 import ru.fylmr.poplibs_nov21.domain.model.GithubRepoModel
 import ru.fylmr.poplibs_nov21.domain.model.GithubUserModel
+import ru.fylmr.poplibs_nov21.domain.repos.IGithubReposRepository
 
 class ReposPresenter(
     private val userModel: GithubUserModel,
@@ -18,7 +18,7 @@ class ReposPresenter(
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
 
-        reposRepository.getRepos(userModel.reposUrl)
+        reposRepository.getRepos(userModel)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(

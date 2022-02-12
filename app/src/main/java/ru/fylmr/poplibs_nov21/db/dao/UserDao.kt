@@ -11,7 +11,7 @@ import ru.fylmr.poplibs_nov21.db.enitity.GithubUserEntity
 interface UserDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(user: GithubUserEntity)
+    fun insert(user: List<GithubUserEntity>)
 
     @Query("SELECT * FROM GithubUserEntity")
     fun getAll(): Single<List<GithubUserEntity>>
