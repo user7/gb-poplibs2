@@ -5,13 +5,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
+import androidx.recyclerview.widget.LinearLayoutManager
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
+import ru.fylmr.poplibs_nov21.App
 import ru.fylmr.poplibs_nov21.databinding.FragmentReposBinding
+import ru.fylmr.poplibs_nov21.domain.repos.GithubReposRepository
+import ru.fylmr.poplibs_nov21.model.GithubRepoModel
 import ru.fylmr.poplibs_nov21.model.GithubUserModel
+import ru.fylmr.poplibs_nov21.network.ApiHolder
+import ru.fylmr.poplibs_nov21.ui.base.BackButtonListener
 import ru.fylmr.poplibs_nov21.ui.repos.adapter.ReposAdapter
 
-class ReposFragment : MvpAppCompatFragment(), ReposView {
+class ReposFragment : MvpAppCompatFragment(), ReposView, BackButtonListener {
 
     private val userModel by lazy {
         requireArguments().getParcelable<GithubUserModel>(KEY_USER_MODEL)!!
@@ -22,7 +28,11 @@ class ReposFragment : MvpAppCompatFragment(), ReposView {
         get() = _binding!!
 
     private val presenter by moxyPresenter {
-        ReposPresenter(userModel)
+        ReposPresenter(
+            userModel,
+            GithubReposRepository(ApiHolder.githubApiService),
+            App.instance.router,
+        )
     }
 
     private val adapter by lazy {
@@ -32,6 +42,22 @@ class ReposFragment : MvpAppCompatFragment(), ReposView {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentReposBinding.inflate(inflater, container, false)
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.reposRecycler.layoutManager = LinearLayoutManager(requireContext())
+        binding.reposRecycler.adapter = adapter
+    }
+
+    override fun showRepos(repos: List<GithubRepoModel>?) {
+        adapter.submitList(repos)
+    }
+
+    override fun backPressed(): Boolean {
+        presenter.backPressed()
+        return true
     }
 
     override fun onDestroy() {

@@ -24,7 +24,7 @@ class ReposAdapter(
 
         fun bind(repo: GithubRepoModel) {
             vb.root.setOnClickListener { itemClickListener(repo) }
-            vb.tvRepoName.text = repo.title
+            vb.tvRepoName.text = repo.name
         }
     }
 }
