@@ -5,12 +5,10 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 import moxy.MvpPresenter
 import ru.fylmr.poplibs_nov21.domain.IGithubUsersRepository
-import ru.fylmr.poplibs_nov21.screens.UsersScreenInitParams
 
 class UsersPresenter(
     private val router: Router,
     private val usersRepository: IGithubUsersRepository,
-    private val initModel: UsersScreenInitParams,
 ) : MvpPresenter<UsersView>() {
 
     override fun onFirstViewAttach() {
