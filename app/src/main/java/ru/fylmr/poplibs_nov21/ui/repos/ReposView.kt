@@ -2,7 +2,7 @@ package ru.fylmr.poplibs_nov21.ui.repos
 
 import moxy.MvpView
 import moxy.viewstate.strategy.alias.AddToEndSingle
-import ru.fylmr.poplibs_nov21.model.GithubRepoModel
+import ru.fylmr.poplibs_nov21.domain.model.GithubRepoModel
 
 interface ReposView : MvpView {
 

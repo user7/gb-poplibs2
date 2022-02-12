@@ -1,4 +1,4 @@
-package ru.fylmr.poplibs_nov21.model
+package ru.fylmr.poplibs_nov21.domain.model
 
 import android.os.Parcelable
 import com.google.gson.annotations.Expose

@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import ru.fylmr.poplibs_nov21.databinding.ItemUserBinding
-import ru.fylmr.poplibs_nov21.model.GithubUserModel
+import ru.fylmr.poplibs_nov21.domain.model.GithubUserModel
 import ru.fylmr.poplibs_nov21.ui.base.ImageLoader
 
 class UsersAdapter(

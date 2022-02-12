@@ -3,6 +3,7 @@ package ru.fylmr.poplibs_nov21
 import android.app.Application
 import com.github.terrakok.cicerone.Cicerone
 import com.github.terrakok.cicerone.Router
+import ru.fylmr.poplibs_nov21.db.GithubDatabase
 
 class App : Application() {
 
@@ -13,6 +14,10 @@ class App : Application() {
 
     val router
         get() = cicerone.router
+
+    val database by lazy {
+        GithubDatabase.getInstance(this)
+    }
 
     override fun onCreate() {
         super.onCreate()

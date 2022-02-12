@@ -11,8 +11,8 @@ import moxy.ktx.moxyPresenter
 import ru.fylmr.poplibs_nov21.App
 import ru.fylmr.poplibs_nov21.databinding.FragmentReposBinding
 import ru.fylmr.poplibs_nov21.domain.repos.GithubReposRepository
-import ru.fylmr.poplibs_nov21.model.GithubRepoModel
-import ru.fylmr.poplibs_nov21.model.GithubUserModel
+import ru.fylmr.poplibs_nov21.domain.model.GithubRepoModel
+import ru.fylmr.poplibs_nov21.domain.model.GithubUserModel
 import ru.fylmr.poplibs_nov21.network.ApiHolder
 import ru.fylmr.poplibs_nov21.ui.base.BackButtonListener
 import ru.fylmr.poplibs_nov21.ui.repos.adapter.ReposAdapter

@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import ru.fylmr.poplibs_nov21.databinding.ItemReposBinding
-import ru.fylmr.poplibs_nov21.model.GithubRepoModel
+import ru.fylmr.poplibs_nov21.domain.model.GithubRepoModel
 
 class ReposAdapter(
     private val itemClickListener: (GithubRepoModel) -> Unit

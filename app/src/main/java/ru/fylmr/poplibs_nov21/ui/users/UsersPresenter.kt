@@ -5,7 +5,7 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 import moxy.MvpPresenter
 import ru.fylmr.poplibs_nov21.domain.users.IGithubUsersRepository
-import ru.fylmr.poplibs_nov21.model.GithubUserModel
+import ru.fylmr.poplibs_nov21.domain.model.GithubUserModel
 import ru.fylmr.poplibs_nov21.screens.AppScreens
 
 class UsersPresenter(

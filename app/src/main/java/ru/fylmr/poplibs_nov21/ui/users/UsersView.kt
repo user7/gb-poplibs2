@@ -3,7 +3,7 @@ package ru.fylmr.poplibs_nov21.ui.users
 import moxy.MvpView
 import moxy.viewstate.strategy.alias.AddToEndSingle
 import moxy.viewstate.strategy.alias.Skip
-import ru.fylmr.poplibs_nov21.model.GithubUserModel
+import ru.fylmr.poplibs_nov21.domain.model.GithubUserModel
 
 interface UsersView : MvpView {
 
