@@ -37,5 +37,5 @@ class NetworkStatus(context: Context) {
 
     fun isOnline() = networkStatusSubject.value ?: false
 
-    fun isOnlineSingle(): Single<Boolean> = networkStatusSubject.first(false)
+    fun isOnlineSingle(): Single<Boolean> = networkStatusSubject.first(true)
 }
