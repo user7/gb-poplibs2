@@ -5,19 +5,14 @@ import moxy.MvpPresenter
 import ru.fylmr.poplibs_nov21.App
 import ru.fylmr.poplibs_nov21.screens.IScreens
 import javax.inject.Inject
-import javax.inject.Named
 
-class MainPresenter : MvpPresenter<MainView>() {
-
-    @Inject
-    lateinit var router: Router
-
-    @Inject
-    lateinit var screens: IScreens
+class MainPresenter @Inject constructor(
+    private val router: Router,
+    private val screens: IScreens,
+) : MvpPresenter<MainView>() {
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
-        App.instance.appComponent.inject(this)
 
         router.replaceScreen(screens.usersScreen())
     }

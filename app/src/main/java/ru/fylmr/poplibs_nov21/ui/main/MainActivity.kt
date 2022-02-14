@@ -21,7 +21,7 @@ class MainActivity : MvpAppCompatActivity(R.layout.activity_main), MainView {
 
     private val navigator = AppNavigator(this, R.id.container)
 
-    private val presenter by moxyPresenter { MainPresenter() }
+    private val presenter by moxyPresenter { App.instance.appComponent.provideMainPresenter() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

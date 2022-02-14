@@ -8,15 +8,16 @@ import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
+import ru.fylmr.poplibs_nov21.App
 import ru.fylmr.poplibs_nov21.databinding.FragmentUsersBinding
 import ru.fylmr.poplibs_nov21.domain.model.GithubUserModel
 import ru.fylmr.poplibs_nov21.ui.base.BackButtonListener
 import ru.fylmr.poplibs_nov21.ui.base.GlideImageLoader
 import ru.fylmr.poplibs_nov21.ui.users.adapter.UsersAdapter
 
-class UsersFragment() : MvpAppCompatFragment(), UsersView, BackButtonListener {
+class UsersFragment : MvpAppCompatFragment(), UsersView, BackButtonListener {
 
-    private val presenter by moxyPresenter { UsersPresenter() }
+    private val presenter by moxyPresenter { App.instance.appComponent.provideUsersPresenter() }
 
     private var _binding: FragmentUsersBinding? = null
     private val binding
