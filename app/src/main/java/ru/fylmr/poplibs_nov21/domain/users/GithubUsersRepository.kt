@@ -6,8 +6,9 @@ import ru.fylmr.poplibs_nov21.db.enitity.GithubUserEntity
 import ru.fylmr.poplibs_nov21.domain.model.GithubUserModel
 import ru.fylmr.poplibs_nov21.network.GithubApiService
 import ru.fylmr.poplibs_nov21.network.NetworkStatus
+import javax.inject.Inject
 
-class GithubUsersRepository(
+class GithubUsersRepository @Inject constructor(
     private val githubApiService: GithubApiService,
     private val userDao: UserDao,
     private val networkStatus: NetworkStatus,

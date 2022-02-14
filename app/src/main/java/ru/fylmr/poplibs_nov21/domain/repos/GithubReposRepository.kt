@@ -8,8 +8,9 @@ import ru.fylmr.poplibs_nov21.domain.model.GithubUserModel
 import ru.fylmr.poplibs_nov21.domain.model.Owner
 import ru.fylmr.poplibs_nov21.network.GithubApiService
 import ru.fylmr.poplibs_nov21.network.NetworkStatus
+import javax.inject.Inject
 
-class GithubReposRepository(
+class GithubReposRepository @Inject constructor(
     private val githubApiService: GithubApiService,
     private val reposDao: ReposDao,
     private val networkStatus: NetworkStatus
