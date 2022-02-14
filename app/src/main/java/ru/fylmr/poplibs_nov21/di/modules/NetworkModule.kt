@@ -14,11 +14,13 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.create
 import ru.fylmr.poplibs_nov21.network.GithubApiService
 import ru.fylmr.poplibs_nov21.network.NetworkStatus
+import javax.inject.Singleton
 
 @Module
 class NetworkModule {
 
     @Provides
+    @Singleton
     fun okHttpClient(): OkHttpClient {
         return OkHttpClient().newBuilder()
             .addInterceptor(HttpLoggingInterceptor())
@@ -26,6 +28,7 @@ class NetworkModule {
     }
 
     @Provides
+    @Singleton
     fun gson(): Gson {
         return GsonBuilder()
             .excludeFieldsWithoutExposeAnnotation()
@@ -34,6 +37,7 @@ class NetworkModule {
     }
 
     @Provides
+    @Singleton
     fun retrofit(gson: Gson, okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
             .baseUrl("https://api.github.com")
@@ -44,11 +48,13 @@ class NetworkModule {
     }
 
     @Provides
+    @Singleton
     fun githubApiService(retrofit: Retrofit): GithubApiService {
         return retrofit.create()
     }
 
     @Provides
+    @Singleton
     fun provideNetworkStatus(context: Context): NetworkStatus {
         return NetworkStatus(context)
     }

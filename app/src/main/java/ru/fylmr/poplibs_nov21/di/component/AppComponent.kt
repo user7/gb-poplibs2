@@ -10,6 +10,7 @@ import ru.fylmr.poplibs_nov21.ui.main.MainActivity
 import ru.fylmr.poplibs_nov21.ui.main.MainPresenter
 import ru.fylmr.poplibs_nov21.ui.repos.ReposPresenter
 import ru.fylmr.poplibs_nov21.ui.users.UsersPresenter
+import javax.inject.Singleton
 
 @Component(
     modules = [
@@ -20,6 +21,7 @@ import ru.fylmr.poplibs_nov21.ui.users.UsersPresenter
         RepositoryModule::class,
     ]
 )
+@Singleton
 interface AppComponent {
 
     fun inject(mainActivity: MainActivity)

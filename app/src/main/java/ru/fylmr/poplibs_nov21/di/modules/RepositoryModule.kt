@@ -10,11 +10,13 @@ import ru.fylmr.poplibs_nov21.domain.users.GithubUsersRepository
 import ru.fylmr.poplibs_nov21.domain.users.IGithubUsersRepository
 import ru.fylmr.poplibs_nov21.network.GithubApiService
 import ru.fylmr.poplibs_nov21.network.NetworkStatus
+import javax.inject.Singleton
 
 @Module
 class RepositoryModule {
 
     @Provides
+    @Singleton
     fun usersRepo(
         apiService: GithubApiService,
         usersDao: UserDao,
@@ -24,6 +26,7 @@ class RepositoryModule {
     }
 
     @Provides
+    @Singleton
     fun reposRepo(
         apiService: GithubApiService,
         reposDao: ReposDao,
