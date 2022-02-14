@@ -8,6 +8,7 @@ import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.LinearLayoutManager
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
+import ru.fylmr.poplibs_nov21.App
 import ru.fylmr.poplibs_nov21.databinding.FragmentReposBinding
 import ru.fylmr.poplibs_nov21.domain.model.GithubRepoModel
 import ru.fylmr.poplibs_nov21.domain.model.GithubUserModel
@@ -24,7 +25,9 @@ class ReposFragment : MvpAppCompatFragment(), ReposView, BackButtonListener {
     private val binding: FragmentReposBinding
         get() = _binding!!
 
-    private val presenter by moxyPresenter { ReposPresenter(userModel) }
+    private val presenter by moxyPresenter {
+        App.instance.appComponent.provideReposPresenterFactory().presenter(userModel)
+    }
 
     private val adapter by lazy {
         ReposAdapter(presenter::onItemClicked)

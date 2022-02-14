@@ -9,6 +9,7 @@ import ru.fylmr.poplibs_nov21.di.modules.RepositoryModule
 import ru.fylmr.poplibs_nov21.ui.main.MainActivity
 import ru.fylmr.poplibs_nov21.ui.main.MainPresenter
 import ru.fylmr.poplibs_nov21.ui.repos.ReposPresenter
+import ru.fylmr.poplibs_nov21.ui.repos.ReposPresenterFactory
 import ru.fylmr.poplibs_nov21.ui.users.UsersPresenter
 import javax.inject.Singleton
 
@@ -27,6 +28,8 @@ interface AppComponent {
     fun provideMainPresenter(): MainPresenter
 
     fun provideUsersPresenter(): UsersPresenter
+
+    fun provideReposPresenterFactory(): ReposPresenterFactory
 
     fun inject(mainActivity: MainActivity)
 

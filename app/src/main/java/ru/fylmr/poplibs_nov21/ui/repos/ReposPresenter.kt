@@ -2,6 +2,9 @@ package ru.fylmr.poplibs_nov21.ui.repos
 
 import android.util.Log
 import com.github.terrakok.cicerone.Router
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 import moxy.MvpPresenter
@@ -9,17 +12,12 @@ import ru.fylmr.poplibs_nov21.App
 import ru.fylmr.poplibs_nov21.domain.model.GithubRepoModel
 import ru.fylmr.poplibs_nov21.domain.model.GithubUserModel
 import ru.fylmr.poplibs_nov21.domain.repos.IGithubReposRepository
-import javax.inject.Inject
 
-class ReposPresenter(
-    private val userModel: GithubUserModel,
+class ReposPresenter @AssistedInject constructor(
+    @Assisted private val userModel: GithubUserModel,
+    private val reposRepository: IGithubReposRepository,
+    private val router: Router,
 ) : MvpPresenter<ReposView>() {
-
-    @Inject
-    lateinit var reposRepository: IGithubReposRepository
-
-    @Inject
-    lateinit var router: Router
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
@@ -47,4 +45,10 @@ class ReposPresenter(
         router.exit()
         return true
     }
+}
+
+@AssistedFactory
+interface ReposPresenterFactory {
+
+    fun presenter(userModel: GithubUserModel): ReposPresenter
 }
