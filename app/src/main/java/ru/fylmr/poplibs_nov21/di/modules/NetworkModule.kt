@@ -14,10 +14,17 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.create
 import ru.fylmr.poplibs_nov21.network.GithubApiService
 import ru.fylmr.poplibs_nov21.network.NetworkStatus
+import javax.inject.Named
 import javax.inject.Singleton
 
 @Module
 class NetworkModule {
+
+    @Provides
+    @Named(NAMED_BASE_URL)
+    fun provideBaseUrl(): String {
+        return "https://api.github.com"
+    }
 
     @Provides
     @Singleton
@@ -38,9 +45,9 @@ class NetworkModule {
 
     @Provides
     @Singleton
-    fun retrofit(gson: Gson, okHttpClient: OkHttpClient): Retrofit {
+    fun retrofit(gson: Gson, okHttpClient: OkHttpClient, @Named(NAMED_BASE_URL) baseUrl: String): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("https://api.github.com")
+            .baseUrl(baseUrl)
             .addConverterFactory(GsonConverterFactory.create(gson))
             .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
             .client(okHttpClient)
@@ -57,5 +64,10 @@ class NetworkModule {
     @Singleton
     fun provideNetworkStatus(context: Context): NetworkStatus {
         return NetworkStatus(context)
+    }
+
+    companion object {
+
+        private const val NAMED_BASE_URL = "baseUrl"
     }
 }

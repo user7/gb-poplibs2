@@ -5,6 +5,7 @@ import moxy.MvpPresenter
 import ru.fylmr.poplibs_nov21.App
 import ru.fylmr.poplibs_nov21.screens.IScreens
 import javax.inject.Inject
+import javax.inject.Named
 
 class MainPresenter : MvpPresenter<MainView>() {
 
