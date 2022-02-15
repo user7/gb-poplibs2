@@ -12,6 +12,7 @@ import ru.fylmr.poplibs_nov21.App
 import ru.fylmr.poplibs_nov21.databinding.FragmentUsersBinding
 import ru.fylmr.poplibs_nov21.domain.model.GithubUserModel
 import ru.fylmr.poplibs_nov21.domain.users.GithubUsersRepository
+import ru.fylmr.poplibs_nov21.domain.users.RoomGithubUsersCache
 import ru.fylmr.poplibs_nov21.network.ApiHolder
 import ru.fylmr.poplibs_nov21.network.NetworkStatus
 import ru.fylmr.poplibs_nov21.ui.base.BackButtonListener
@@ -25,7 +26,7 @@ class UsersFragment() : MvpAppCompatFragment(), UsersView, BackButtonListener {
             App.instance.router,
             GithubUsersRepository(
                 ApiHolder.githubApiService,
-                App.instance.database.userDao,
+                RoomGithubUsersCache(App.instance.database.userDao),
                 NetworkStatus(requireContext())
             )
         )
