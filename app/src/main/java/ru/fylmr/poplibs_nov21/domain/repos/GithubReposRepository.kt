@@ -11,23 +11,16 @@ import ru.fylmr.poplibs_nov21.network.NetworkStatus
 
 class GithubReposRepository(
     private val githubApiService: GithubApiService,
-    private val reposDao: ReposDao,
+    private val githubReposCache: IGithubReposCache,
     private val networkStatus: NetworkStatus
 ) : IGithubReposRepository {
 
-    override fun getRepos(user: GithubUserModel): Single<List<GithubRepoModel>> = networkStatus.isOnlineSingle()
-        .flatMap { isOnline ->
+    override fun getRepos(user: GithubUserModel): Single<List<GithubRepoModel>> =
+        networkStatus.isOnlineSingle().flatMap { isOnline ->
             if (isOnline) {
-                githubApiService.getRepos(user.reposUrl)
-                    .flatMap { repos ->
-                        reposDao.insert(repos.map { GithubRepoEntity(it.id, it.name, it.owner.ownerId) })
-                        Single.just(repos)
-                    }
+                githubReposCache.updateCache(githubApiService.getRepos(user.reposUrl))
             } else {
-                reposDao.getAll(user.id)
-                    .map { list ->
-                        list.map { repo -> GithubRepoModel(repo.name, repo.id, Owner(repo.userId)) }
-                    }
+                githubReposCache.retrieveCache(user.id)
             }
         }
 }

@@ -13,6 +13,7 @@ import ru.fylmr.poplibs_nov21.databinding.FragmentReposBinding
 import ru.fylmr.poplibs_nov21.domain.model.GithubRepoModel
 import ru.fylmr.poplibs_nov21.domain.model.GithubUserModel
 import ru.fylmr.poplibs_nov21.domain.repos.GithubReposRepository
+import ru.fylmr.poplibs_nov21.domain.repos.RoomGithubReposCache
 import ru.fylmr.poplibs_nov21.network.ApiHolder
 import ru.fylmr.poplibs_nov21.network.NetworkStatus
 import ru.fylmr.poplibs_nov21.ui.base.BackButtonListener
@@ -33,7 +34,7 @@ class ReposFragment : MvpAppCompatFragment(), ReposView, BackButtonListener {
             userModel,
             GithubReposRepository(
                 ApiHolder.githubApiService,
-                App.instance.database.reposDao,
+                RoomGithubReposCache(App.instance.database.reposDao),
                 NetworkStatus(requireContext())
             ),
             App.instance.router,
