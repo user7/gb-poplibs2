@@ -2,6 +2,8 @@ package ru.fylmr.poplibs_nov21
 
 import android.app.Application
 import ru.fylmr.poplibs_nov21.di.component.DaggerAppComponent
+import ru.fylmr.poplibs_nov21.di.component.ReposSubcomponent
+import ru.fylmr.poplibs_nov21.di.component.UsersSubcomponent
 import ru.fylmr.poplibs_nov21.di.modules.ContextModule
 
 class App : Application() {
@@ -10,6 +12,30 @@ class App : Application() {
         DaggerAppComponent.builder()
             .contextModule(ContextModule(this))
             .build()
+    }
+
+    var usersSubcomponent: UsersSubcomponent? = null
+        private set
+
+    var reposSubcomponent: ReposSubcomponent? = null
+        private set
+
+    fun initUsersSubcomponent(): UsersSubcomponent {
+        usersSubcomponent = appComponent.provideUsersSubcomponent()
+        return usersSubcomponent!!
+    }
+
+    fun initReposSubcomponent(): ReposSubcomponent {
+        reposSubcomponent = appComponent.provideReposSubcomponent()
+        return reposSubcomponent!!
+    }
+
+    fun destroyReposSubcomponent() {
+        reposSubcomponent = null
+    }
+
+    fun destroyUsersSubcomponent() {
+        usersSubcomponent = null
     }
 
     override fun onCreate() {

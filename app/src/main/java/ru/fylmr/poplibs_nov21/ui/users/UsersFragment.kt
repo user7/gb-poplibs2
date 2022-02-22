@@ -17,7 +17,10 @@ import ru.fylmr.poplibs_nov21.ui.users.adapter.UsersAdapter
 
 class UsersFragment : MvpAppCompatFragment(), UsersView, BackButtonListener {
 
-    private val presenter by moxyPresenter { App.instance.appComponent.provideUsersPresenter() }
+    private val presenter by moxyPresenter {
+        App.instance.initUsersSubcomponent()
+        App.instance.usersSubcomponent?.provideUsersPresenter()!!
+    }
 
     private var _binding: FragmentUsersBinding? = null
     private val binding
