@@ -4,6 +4,7 @@ import com.github.terrakok.cicerone.Router
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 import moxy.MvpPresenter
+import ru.fylmr.poplibs_nov21.App
 import ru.fylmr.poplibs_nov21.domain.model.GithubUserModel
 import ru.fylmr.poplibs_nov21.domain.users.IGithubUsersRepository
 import ru.fylmr.poplibs_nov21.screens.IScreens
@@ -19,6 +20,11 @@ class UsersPresenter @Inject constructor(
         super.onFirstViewAttach()
 
         loadData()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        App.instance.destroyUsersSubcomponent()
     }
 
     private fun loadData() {
